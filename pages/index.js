@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Advotics Web Dev Assignment</title>
+        <link rel="icon" href="/advotics-favicon.png" />
       </Head>
       <Layouts>
         <Dashboard />

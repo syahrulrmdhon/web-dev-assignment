@@ -7,7 +7,7 @@ const Layouts = ({ children }) => {
   return (
     <Layout>
       <Navbar />
-      <Layout>
+      <Layout style={{height: "80vh"}}>
         <Sidebar />
         <Layout style={{ padding: "0 24px 24px" }}>{children}</Layout>
       </Layout>

@@ -10,6 +10,7 @@ const CardFilter = styled.div`
   box-shadow: 0px 2px 3px #00000029;
   border-radius: 2px;
   padding: 10px 20px;
+  cursor: pointer;
   width: 50%;
   position: absolute;
   right: 0;
@@ -34,8 +35,7 @@ const CardDatePicker = styled.div`
   margin-top: 60px;
 `;
 
-const FilterPeriod = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const FilterPeriod = ({ collapsed, setCollapsed }) => {
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -45,7 +45,7 @@ const FilterPeriod = () => {
   ]);
   return (
     <React.Fragment>
-      <CardFilter>
+      <CardFilter onClick={() => setCollapsed(!collapsed)}>
         <Image src="/calendar.png" width={22} height={22} />
         <SpanPeriod>Period</SpanPeriod>
         <SpanRange>20 February 2021 - 20 February 2021</SpanRange>

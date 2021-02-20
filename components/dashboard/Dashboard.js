@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, Row, Col } from "antd";
 import styled from "styled-components";
 import FilterPeriod from "./FilterPeriod";
@@ -17,6 +17,9 @@ const ContentCustom = styled(Content)`
 `;
 
 const Dashboard = ({}) => {
+  const [collapsed, setCollapsed] = useState(false);
+  const [MiCollapsed, setMiCollapsed] = useState(false);
+
   return (
     <ContentCustom className="site-layout-background">
       <Row>
@@ -24,10 +27,13 @@ const Dashboard = ({}) => {
           <h1>Dashboard</h1>
         </Col>
         <Col span={16}>
-          <FilterPeriod />
+          <FilterPeriod collapsed={collapsed} setCollapsed={setCollapsed} />
         </Col>
         <Col span={24}>
-          <MarketInsight />
+          <MarketInsight
+            collapsed={MiCollapsed}
+            setCollapsed={setMiCollapsed}
+          />
         </Col>
       </Row>
     </ContentCustom>

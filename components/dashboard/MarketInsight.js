@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import Image from "next/image";
 import styled from "styled-components";
-import Chart from "react-apexcharts";
+import { Chart } from "react-google-charts";
 
 const CardInsight = styled.div`
   background: #37b04c 0% 0% no-repeat padding-box;
@@ -57,69 +57,40 @@ const CardStats = styled.div`
   border-radius: 2px;
   padding: 10px 20px;
   margin: 20px 15px 0 0;
+  h4 {
+    font-sze: 24px;
+    color: #4d4f5c;
+    font-weight: 400;
+  }
+`;
+
+const CardProduct = styled(Row)`
+  background: #ffe7bd 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  &.bottom {
+    border: 0.5px solid #c5c5c59c;
+    margin: 10px 0 0 0;
+    font-size: 10px;
+    background: #fff !important;
+  }
+`;
+
+const ColProd = styled(Col)`
+  margin-bottom: -10px;
+  &.content {
+    padding: 10px;
+    span {
+      margin-left: 30px;
+    }
+  }
+  &.bottom {
+    margin-bottom: 0;
+  }
 `;
 
 const MarketInsight = ({ collapsed, setCollapsed }) => {
-  const [state, setState] = useState({
-    series: [
-      {
-        name: "Website Blog",
-        type: "column",
-        data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160],
-      },
-      {
-        name: "Social Media",
-        type: "line",
-        data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
-      },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: "line",
-      },
-      stroke: {
-        width: [0, 4],
-      },
-      title: {
-        text: "Traffic Sources",
-      },
-      dataLabels: {
-        enabled: true,
-        enabledOnSeries: [1],
-      },
-      labels: [
-        "01 Jan 2001",
-        "02 Jan 2001",
-        "03 Jan 2001",
-        "04 Jan 2001",
-        "05 Jan 2001",
-        "06 Jan 2001",
-        "07 Jan 2001",
-        "08 Jan 2001",
-        "09 Jan 2001",
-        "10 Jan 2001",
-        "11 Jan 2001",
-        "12 Jan 2001",
-      ],
-      xaxis: {
-        type: "datetime",
-      },
-      yaxis: [
-        {
-          title: {
-            text: "Website Blog",
-          },
-        },
-        {
-          opposite: true,
-          title: {
-            text: "Social Media",
-          },
-        },
-      ],
-    },
-  });
+  const loop = [0, 1, 2, 3];
+
   return (
     <React.Fragment>
       <CardInsight onClick={() => setCollapsed(!collapsed)}>
@@ -173,20 +144,117 @@ const MarketInsight = ({ collapsed, setCollapsed }) => {
           <Row>
             <Col span={14}>
               <CardStats>
-                Stats
+                <Row>
+                  <Col span={23}>
+                    <h4>AVERAGE PURCHASE VALUE</h4>
+                  </Col>
+                  <Col span={1}>
+                    <MoreOutlined />
+                  </Col>
+                </Row>
                 <Chart
-                  options={state.options}
-                  series={state.series}
-                  type="line"
-                  height={350}
+                  width={"500px"}
+                  height={"300px"}
+                  chartType="ComboChart"
+                  loader={<div>Loading Chart</div>}
+                  data={[
+                    [
+                      "Month",
+                      "Bolivia",
+                      "Ecuador",
+                      "Madagascar",
+                      "Papua New Guinea",
+                      "Rwanda",
+                      "Average",
+                    ],
+                    ["2004/05", 165, 938, 522, 998, 450, 614.6],
+                    ["2005/06", 135, 1120, 599, 1268, 288, 682],
+                    ["2006/07", 157, 1167, 587, 807, 397, 623],
+                    ["2007/08", 139, 1110, 615, 968, 215, 609.4],
+                    ["2008/09", 136, 691, 629, 1026, 366, 569.6],
+                  ]}
+                  options={{
+                    title: "Monthly Coffee Production by Country",
+                    vAxis: { title: "Cups" },
+                    hAxis: { title: "Month" },
+                    seriesType: "bars",
+                    series: { 5: { type: "line" } },
+                  }}
+                  rootProps={{ "data-testid": "1" }}
                 />
               </CardStats>
             </Col>
             <Col span={5}>
-              <CardStats>Top Sell</CardStats>
+              <CardStats>
+                <Row>
+                  <Col span={23}>
+                    <h4>BEST SELLING SKU</h4>
+                  </Col>
+                  <Col span={1}>
+                    <MoreOutlined />
+                  </Col>
+                </Row>
+                <CardProduct>
+                  <ColProd span={8}>
+                    <Image src="/susu.jpg" width={100} height={105} />
+                  </ColProd>
+                  <ColProd className="content" span={16}>
+                    <h3>Susu</h3>
+                    <p>
+                      Rp. 45.000,- <span>3</span>
+                    </p>
+                  </ColProd>
+                </CardProduct>
+                {loop.map((item) => (
+                  <CardProduct className="bottom" key={item}>
+                    <ColProd className="bottom" span={8}>
+                      <Image src="/susu.jpg" width={60} height={65} />
+                    </ColProd>
+                    <ColProd className="content" span={16}>
+                      <h3>Susu</h3>
+                      <p>
+                        Rp. 45.000,- <span>3</span>
+                      </p>
+                    </ColProd>
+                  </CardProduct>
+                ))}
+              </CardStats>
             </Col>
             <Col span={5}>
-              <CardStats>Top Competitors</CardStats>
+              <CardStats>
+                <Row>
+                  <Col span={23}>
+                    <h4>TOP COMPETITOR SKU</h4>
+                  </Col>
+                  <Col span={1}>
+                    <MoreOutlined />
+                  </Col>
+                </Row>
+                <CardProduct>
+                  <ColProd span={8}>
+                    <Image src="/susu.jpg" width={100} height={105} />
+                  </ColProd>
+                  <ColProd className="content" span={16}>
+                    <h3>Susu</h3>
+                    <p>
+                      Rp. 45.000,- <span>3</span>
+                    </p>
+                  </ColProd>
+                </CardProduct>
+                {loop.map((item) => (
+                  <CardProduct className="bottom" key={item}>
+                    <ColProd className="bottom" span={8}>
+                      <Image src="/susu.jpg" width={60} height={65} />
+                    </ColProd>
+                    <ColProd className="content" span={16}>
+                      <h3>Susu</h3>
+                      <p>
+                        Rp. 45.000,- <span>3</span>
+                      </p>
+                    </ColProd>
+                  </CardProduct>
+                ))}
+              </CardStats>
             </Col>
           </Row>
         </React.Fragment>

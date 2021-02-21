@@ -1,6 +1,11 @@
 import React from "react";
 import { Row, Col } from "antd";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  UpOutlined,
+  MoreOutlined,
+  FallOutlined,
+} from "@ant-design/icons";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -19,6 +24,24 @@ const CardInsight = styled.div`
     color: #fff;
     text-decoration: underline;
     margin: 10px;
+  }
+`;
+
+const CardSales = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 3px #00000029;
+  border-radius: 2px;
+  padding: 10px 20px;
+  margin: 20px 0;
+  width: 20%;
+  h3 {
+    font-size: 30px;
+  }
+  .stats {
+    font-size: 11px;
+    strong {
+      color: red;
+    }
   }
 `;
 
@@ -52,6 +75,32 @@ const MarketInsight = ({ collapsed, setCollapsed }) => {
           </ColCustom>
         </Row>
       </CardInsight>
+      {collapsed && (
+        <CardSales>
+          <Row>
+            <Col span={22}>
+              <p>Sales Turnover</p>
+            </Col>
+            <Col span={2}>
+              <MoreOutlined />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={20}>
+              <h3>Rp. 3,600,000</h3>
+              <p className="stats">
+                <strong>
+                  <FallOutlined /> 13.8%
+                </strong>{" "}
+                last period in products sold
+              </p>
+            </Col>
+            <Col span={4}>
+              <Image src="/sales.svg" height={49} width={43} />
+            </Col>
+          </Row>
+        </CardSales>
+      )}
     </React.Fragment>
   );
 };

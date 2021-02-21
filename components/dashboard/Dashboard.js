@@ -18,7 +18,7 @@ const ContentCustom = styled(Content)`
 
 const Dashboard = ({}) => {
   const [collapsed, setCollapsed] = useState(false);
-  const [MiCollapsed, setMiCollapsed] = useState(false);
+  const [MiCollapsed, setMiCollapsed] = useState(true);
 
   return (
     <ContentCustom className="site-layout-background">
